@@ -1,0 +1,33 @@
+services:
+  # AI Service (Python FastAPI)
+  - type: web
+    name: teraleads-ai-service
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    rootDir: ai-service
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-flash-latest
+
+  # Backend (Node.js Express)
+  - type: web
+    name: teraleads-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: AI_SERVICE_URL
+        fromService:
+          name: teraleads-ai-service
+          type: web
+          property: host
+      - key: CORS_ORIGIN
+        value: "*" # Set to Vercel URL after frontend is deployed
