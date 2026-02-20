@@ -11,7 +11,7 @@ const baseUrl = config.aiService.url.replace(/\/$/, '');
 async function generateReply(message, patientContext = {}) {
   const url = `${baseUrl}/generate`;
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000);
+  const timeout = setTimeout(() => controller.abort(), 90000); // Increased to 90s for Render cold starts
 
   try {
     const response = await fetch(url, {
