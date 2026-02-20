@@ -13,9 +13,9 @@ A full-stack AI-powered patient assistant dashboard for a dental clinic. Built w
 
 After deployment, update these placeholder URLs:
 
-- **Frontend**: `https://your-app.vercel.app`
-- **Backend API**: `https://your-backend.railway.app`
-- **AI Service**: `https://your-ai.railway.app`
+- **Frontend**: [https://teraleads.vercel.app](https://teraleads.vercel.app) (Update after Vercel deployment)
+- **Backend API**: [https://teraleads-backend-wl16.onrender.com](https://teraleads-backend-wl16.onrender.com)
+- **AI Service**: [https://teraleads-ai-service-vtzu.onrender.com](https://teraleads-ai-service-vtzu.onrender.com)
 
 ## Architecture Overview
 
