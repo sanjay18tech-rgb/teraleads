@@ -8,14 +8,22 @@ const chatRoutes = require('./routes/chat');
 
 const app = express();
 
-// CORS - allow multiple origins or single origin
-const corsOrigin = config.cors.origin;
-app.use(
-  cors({
-    origin: corsOrigin === '*' ? true : corsOrigin.split(',').map((o) => o.trim()),
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: (origin, callback) => {
+    // If no origin (e.g. same-origin or server-to-server), allow it
+    if (!origin) return callback(null, true);
+
+    const origins = config.cors.origin.split(',').map(o => o.trim());
+    if (config.cors.origin === '*' || origins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS error: Origin ${origin} not allowed`));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
